@@ -1,5 +1,4 @@
-FROM java:8
-
+FROM openjdk:8-jre-slim
 ADD target/server.jar /srv/ephemeris-api.jar
 
 EXPOSE 8080
