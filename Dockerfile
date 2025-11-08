@@ -17,7 +17,8 @@ FROM eclipse-temurin:8-jre
 WORKDIR /srv
 
 # Copy the built jar from builder stage
-COPY --from=builder /app/target/ephemeris-api-0.0.1-SNAPSHOT-standalone.jar /srv/ephemeris-api-0.0.1-SNAPSHOT-standalone.jar
+COPY --from=builder /app/target/*-standalone.jar /srv/server.jar
+
 EXPOSE 8080
 
-CMD ["java", "-Dnomad.env=prod", "-jar", "/srv/ephemeris-api-0.0.1-SNAPSHOT-standalone.jar"]
+CMD ["java", "-Dnomad.env=prod", "-jar", "/srv/server.jar"]
