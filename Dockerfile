@@ -21,4 +21,4 @@ COPY --from=builder /app/target/*-standalone.jar /srv/server.jar
 
 EXPOSE 8080
 
-CMD ["java", "-Dnomad.env=prod", "-jar", "/srv/server.jar"]
+CMD ["java", "-Dnomad.env=prod", "-Dephemeris.api.port=8080", "-Dephemeris.api.base=/", "-jar", "/srv/server.jar"]
