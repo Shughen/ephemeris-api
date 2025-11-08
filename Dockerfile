@@ -17,6 +17,7 @@ WORKDIR /srv
 
 # Copy the built jar from builder stage
 COPY --from=builder /app/target/server.jar /srv/server.jar
+COPY --from=builder /app/project.clj /srv/project.clj
 EXPOSE 8080
 
 CMD ["java", "-Dnomad.env=prod", "-Dephemeris.api.port=8080", "-Dephemeris.api.base=/", "-jar", "/srv/server.jar"]
