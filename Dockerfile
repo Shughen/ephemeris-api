@@ -11,14 +11,16 @@ COPY resources ./resources
 # Build uberjar
 RUN lein uberjar
 
+# Rename JAR to fixed name for easier COPY
+RUN mv target/*-standalone.jar target/server.jar
+
 # Runtime stage
 FROM eclipse-temurin:8-jre
 
 WORKDIR /srv
 
 # Copy the built jar from builder stage
-COPY --from=builder /app/target/*-standalone.jar /srv/server.jar
-
+COPY --from=builder /app/target/server.jar /srv/server.jar
 EXPOSE 8080
 
 CMD ["java", "-Dnomad.env=prod", "-Dephemeris.api.port=8080", "-Dephemeris.api.base=/", "-jar", "/srv/server.jar"]
