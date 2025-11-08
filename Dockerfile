@@ -12,8 +12,7 @@ COPY resources ./resources
 RUN lein uberjar
 
 # Rename JAR to fixed name for easier COPY
-RUN mv target/*-standalone.jar target/server.jar
-
+RUN bash -c 'mv target/*-standalone.jar target/server.jar'
 # Runtime stage
 FROM eclipse-temurin:8-jre
 
